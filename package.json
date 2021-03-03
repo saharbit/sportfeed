@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/native": "^5.9.3",
+    "@react-navigation/stack": "^5.14.3",
     "react": "16.13.1",
     "react-native": "0.63.4",
     "react-native-gesture-handler": "^1.10.3",
@@ -49,9 +50,13 @@
       "jsx",
       "json",
       "node"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/setup/assetsTransformer.js",
+      "\\.(css|less)$": "<rootDir>/setup/assetsTransformer.js"
+    },
+    "setupFiles": [
+      "<rootDir>/setup/jestSetup.js"
     ]
-  },
-  "setupFilesAfterEnv": [
-    "@testing-library/jest-native/extend-expect"
-  ]
+  }
 }

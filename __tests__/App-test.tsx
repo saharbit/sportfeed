@@ -1,23 +1,24 @@
 import 'react-native';
 import React from 'react';
-import App from '../App';
+import App from '../src/App';
+import '@testing-library/jest-native/extend-expect';
 
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
-import {render} from '@testing-library/react-native';
+import {fireEvent, render} from '@testing-library/react-native';
+import {sports} from '../src/sports';
+import {blue} from '../src/theme';
 
 it('renders correctly', () => {
   renderer.create(<App />);
 });
 
-it('Welcomes user to react', () => {
+it('should allow selecting sports', () => {
   const {getByText} = render(<App />);
-  const welcomeMessage = getByText('Welcome to React');
-  expect(welcomeMessage).toBeTruthy();
-});
+  const sportName = sports[0].name;
+  const selectSportButton = getByText(sportName);
 
-// it('Shows you which file to edit', () => {
-//   const {getByText} = render(<App />);
-//   const editFile = getByText(/Edit App.tsx/);
-//   expect(editFile).toBeTruthy();
-// });
+  expect(selectSportButton).toHaveStyle({color: 'white'});
+  fireEvent.press(selectSportButton);
+  expect(selectSportButton).toHaveStyle({color: blue});
+});

@@ -1,19 +1,40 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import MyText from './MyText';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {sports} from '../sports';
+import {blue} from '../theme';
 
-const sports = ['Football', 'NBA', 'Formula 1'];
+type Props = {
+  selectedSports: string[];
+  selectSport: (name: string) => void;
+};
 
-const SportsSelection = () => {
+const SportsSelection = ({selectedSports, selectSport}: Props) => {
   return (
     <View style={styles.sportsContainer}>
-      {sports.map((sport, index) => (
-        <View style={styles.sportContainer} key={index}>
-          <Icon name="rocket" size={30} color="#900" />
-          <MyText style={styles.sportText}>{sport}</MyText>
-        </View>
-      ))}
+      {sports.map(({name, getIcon}, index) => {
+        const isSelected = !!selectedSports.find((sport) => sport === name);
+        const Icon = getIcon(isSelected);
+
+        return (
+          <TouchableOpacity
+            style={{
+              ...styles.sportContainer,
+              ...(isSelected ? styles.sportsContainerSelected : {}),
+            }}
+            key={index}
+            onPress={() => selectSport(name)}>
+            {Icon}
+            <MyText
+              style={{
+                ...styles.sportText,
+                ...(isSelected ? styles.sportTextSelected : {}),
+              }}>
+              {name}
+            </MyText>
+          </TouchableOpacity>
+        );
+      })}
     </View>
   );
 };
@@ -21,18 +42,28 @@ const SportsSelection = () => {
 const styles = StyleSheet.create({
   sportsContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    marginBottom: 30,
   },
   sportContainer: {
     backgroundColor: '#363a3f',
     height: 100,
     width: 100,
-    borderRadius: 30,
+    borderRadius: 25,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
+    margin: 10,
+  },
+  sportsContainerSelected: {
+    borderWidth: 4,
+    borderColor: blue,
   },
   sportText: {
-    fontWeight: '600',
+    fontWeight: '700',
+  },
+  sportTextSelected: {
+    color: blue,
   },
   sportImage: {
     height: 50,
