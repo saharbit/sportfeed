@@ -1,8 +1,8 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import MyText from './MyText';
-import {sports} from '../sports';
-import {blue} from '../theme';
+import MyText from '../../components/MyText';
+import {sports} from '../../consts/sports';
+import {blue, lessDarkBackground} from '../../consts/theme';
 
 type Props = {
   selectedSports: string[];
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   sportContainer: {
-    backgroundColor: '#363a3f',
+    backgroundColor: lessDarkBackground,
     height: 100,
     width: 100,
     borderRadius: 25,

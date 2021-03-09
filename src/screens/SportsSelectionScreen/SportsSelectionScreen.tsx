@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import MyText from './MyText';
+import MyText from '../../components/MyText';
 import SportsSelection from './SportsSelection';
 import {ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
-import {blue, darkBackground} from '../theme';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {RootStackParamList} from '../App';
+import {RootStackParamList} from '../../App';
+import {blue, darkBackground} from '../../consts/theme';
 
 type SportsSelectionScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -19,7 +19,9 @@ const SportsSelectionScreen = ({navigation}: Props) => {
   const [selectedSports, setSelectedSports] = useState<string[]>([]);
 
   function selectSport(sport: string) {
-    if (selectedSports.find((name) => name === sport)) {
+    let sportSelected = selectedSports.find((name) => name === sport);
+
+    if (sportSelected) {
       setSelectedSports(selectedSports.filter((name) => name !== sport));
     } else {
       setSelectedSports([...selectedSports, sport]);

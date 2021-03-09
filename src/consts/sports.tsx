@@ -4,7 +4,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {blue} from './theme';
 
-type Sport = {
+export type Sport = {
   name: string;
   getIcon: (isSelected: boolean) => React.ReactNode;
 };

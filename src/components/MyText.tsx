@@ -1,11 +1,12 @@
 import React from 'react';
-import {StyleSheet, Text, TextStyle} from 'react-native';
+import {StyleSheet, Text, TextProps} from 'react-native';
 
 type Props = {
-  style?: TextStyle;
+  style?: TextProps;
+  children: React.ReactNode;
 };
 
-const MyText: React.FC<Props> = ({style, children, ...props}) => {
+const MyText = ({style, children, ...props}: Props & TextProps) => {
   return (
     <Text style={[styles.text, style]} {...props}>
       {children}
