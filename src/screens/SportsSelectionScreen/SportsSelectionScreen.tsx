@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React from 'react';
+import {useState} from 'react';
 import MyText from '../../components/MyText';
 import SportsSelection from './SportsSelection';
 import {ScrollView, StyleSheet, TouchableOpacity} from 'react-native';

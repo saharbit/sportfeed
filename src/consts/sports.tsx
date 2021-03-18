@@ -1,8 +1,8 @@
-import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {blue} from './theme';
+import React from 'react';
 
 export type Sport = {
   name: string;

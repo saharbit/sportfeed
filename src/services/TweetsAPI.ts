@@ -3,7 +3,7 @@ import Config from 'react-native-config';
 import Tweet from '../entities/Tweet';
 import {TweetResult, UserResult} from '../consts/types';
 
-export const fetchTweets = async (setTweets: any) => {
+export const fetchTweets = async () => {
   try {
     const userId = 51263592;
     const response = await axios.get(
@@ -16,10 +16,9 @@ export const fetchTweets = async (setTweets: any) => {
     );
     let tweetsResults: TweetResult[] = response.data.data;
     let user: UserResult = response.data.includes.users[0];
-    const tweets = tweetsResults.map(
+    return tweetsResults.map(
       (result: TweetResult) => new Tweet({...result, ...user}),
     );
-    setTweets(tweets);
   } catch (error) {
     console.error(error);
   }

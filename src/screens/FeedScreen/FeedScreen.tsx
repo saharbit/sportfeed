@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {RefreshControl, ScrollView, StyleSheet} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../App';
@@ -6,6 +6,7 @@ import {darkBackground} from '../../consts/theme';
 import Tweets from './Tweets';
 import Podcasts from './Podcasts';
 import UpcomingGames from './UpcomingGames';
+import {useStoreActions} from '../../store';
 
 export type FeedScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -16,23 +17,24 @@ type Props = {
   navigation: FeedScreenNavigationProp;
 };
 
-const wait = (timeout: number) => {
-  return new Promise((resolve) => setTimeout(resolve, timeout));
-};
-
 const FeedScreen = ({}: Props) => {
-  const [refreshing, setRefreshing] = useState(false);
+  const fetchTweets = useStoreActions((actions) => actions.fetchTweets);
+  const fetchPodcasts = useStoreActions((actions) => actions.fetchPodcasts);
   const onRefresh = useCallback(() => {
-    setRefreshing(true);
-    wait(2000).then(() => setRefreshing(false));
-  }, []);
-  
+    fetchPodcasts();
+    fetchTweets();
+  }, [fetchPodcasts, fetchTweets]);
+
+  useEffect(() => {
+    onRefresh();
+  }, [onRefresh]);
+
   return (
     <ScrollView
       style={styles.view}
       refreshControl={
         <RefreshControl
-          refreshing={refreshing}
+          refreshing={false}
           onRefresh={onRefresh}
           tintColor="white"
         />
@@ -47,8 +49,8 @@ const FeedScreen = ({}: Props) => {
 const styles = StyleSheet.create({
   view: {
     backgroundColor: darkBackground,
-    flexWrap: 'wrap',
     flex: 1,
+    padding: 15,
   },
 });
 
