@@ -1,3 +1,11 @@
+import Podcast from '../entities/Podcast';
+import {UpcomingEvent} from '../entities/UpcomingEvent';
+
+type Category = 'PODCAST' | 'TWEET' | 'GAME';
+export type FeedByCategory = {
+  [category in Category]: (Podcast | UpcomingEvent)[];
+};
+
 export type PredictHQResult = {
   id: string;
   title: string;
@@ -31,4 +39,45 @@ export type PredictHQResult = {
   ];
   state: string;
   brand_safe: true;
+};
+
+export type SpotifyImages = {height: number; url: string; width: number}[];
+export type SpotifyAPIResult = {
+  audio_preview_url: string;
+  description: string;
+  duration_ms: number;
+  explicit: boolean;
+  external_urls: {
+    spotify: 'https://open.spotify.com/episode/4YvxaEksqRa3Vr1cQa64iW';
+  };
+  href: string;
+  id: string;
+  images: SpotifyImages;
+  is_externally_hosted: boolean;
+  is_playable: boolean;
+  language: string;
+  languages: string[];
+  name: string;
+  release_date: string;
+  release_date_precision: string;
+  resume_point: {
+    fully_played: boolean;
+    resume_position_ms: number;
+  };
+  type: string;
+  uri: string;
+};
+
+export type TweetResult = {created_at: string; id: string; text: string};
+export type UserResult = {
+  id: string;
+  name: string;
+  profile_image_url: string;
+  username: string;
+};
+export type TwitterAPIResult = {
+  data: TweetResult[];
+  includes: {
+    users: UserResult[];
+  };
 };

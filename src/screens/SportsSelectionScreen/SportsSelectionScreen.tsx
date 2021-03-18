@@ -37,7 +37,7 @@ const SportsSelectionScreen = ({navigation}: Props) => {
       />
       <TouchableOpacity
         style={styles.letsGoButton}
-        onPress={() => navigation.navigate('UpcomingEventsScreen')}>
+        onPress={() => navigation.navigate('FeedScreen')}>
         <MyText style={styles.letsGoButtonText}>Let's go</MyText>
       </TouchableOpacity>
     </ScrollView>

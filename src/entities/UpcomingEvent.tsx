@@ -1,6 +1,8 @@
 import React from 'react';
-import {Sport, sports} from './sports';
-import {PredictHQResult} from './types';
+import {Sport, sports} from '../consts/sports';
+import {PredictHQResult} from '../consts/types';
+import {View} from 'react-native';
+import MyText from '../components/MyText';
 
 export class UpcomingEvent {
   title: string;
@@ -29,5 +31,13 @@ export class UpcomingEvent {
     }
 
     return sports[0];
+  }
+
+  render() {
+    return (
+      <View>
+        <MyText>{this.title}</MyText>
+      </View>
+    );
   }
 }

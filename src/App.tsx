@@ -3,15 +3,12 @@ import {SafeAreaView, StyleSheet, StatusBar} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import SportsSelectionScreen from './screens/SportsSelectionScreen/SportsSelectionScreen';
-import UpcomingEventsScreen from './screens/UpcomingEventsScreen/UpcomingEventsScreen';
+import FeedScreen from './screens/FeedScreen/FeedScreen';
 import {darkBackground} from './consts/theme';
-import EventScreen from './screens/EventScreen/EventScreen';
-import {UpcomingEvent} from './consts/UpcomingEvent';
 
 export type RootStackParamList = {
   SportsSelectionScreen: undefined;
-  UpcomingEventsScreen: undefined;
-  EventScreen: {event: UpcomingEvent};
+  FeedScreen: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -28,11 +25,7 @@ const App = () => {
             name="SportsSelectionScreen"
             component={SportsSelectionScreen}
           />
-          <Stack.Screen
-            name="UpcomingEventsScreen"
-            component={UpcomingEventsScreen}
-          />
-          <Stack.Screen name="EventScreen" component={EventScreen} />
+          <Stack.Screen name="FeedScreen" component={FeedScreen} />
         </Stack.Navigator>
       </SafeAreaView>
     </NavigationContainer>
