@@ -7,10 +7,14 @@ import FeedScreen from './screens/FeedScreen/FeedScreen';
 import {darkBackground} from './consts/theme';
 import {StoreProvider} from 'easy-peasy';
 import store from './store';
+import TweetsScreen from './screens/TweetsScreen/TweetsScreen';
+import PodcastsScreen from './screens/PodcastsScreen/PodcastsScreen';
 
 export type RootStackParamList = {
   SportsSelectionScreen: undefined;
   FeedScreen: undefined;
+  TweetsScreen: undefined;
+  PodcastsScreen: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -29,6 +33,8 @@ const App = () => {
               component={SportsSelectionScreen}
             />
             <Stack.Screen name="FeedScreen" component={FeedScreen} />
+            <Stack.Screen name="TweetsScreen" component={TweetsScreen} />
+            <Stack.Screen name="PodcastsScreen" component={PodcastsScreen} />
           </Stack.Navigator>
         </SafeAreaView>
       </NavigationContainer>

@@ -18,8 +18,7 @@ type Props = {
 };
 
 const FeedScreen = ({}: Props) => {
-  const fetchTweets = useStoreActions((actions) => actions.fetchTweets);
-  const fetchPodcasts = useStoreActions((actions) => actions.fetchPodcasts);
+  const {fetchTweets, fetchPodcasts} = useStoreActions((actions) => actions);
   const onRefresh = useCallback(() => {
     fetchPodcasts();
     fetchTweets();

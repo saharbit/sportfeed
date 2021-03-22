@@ -1,36 +1,28 @@
 import React, {useState} from 'react';
-import {
-  Dimensions,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import MyText from '../../components/MyText';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useStoreState} from '../../store';
+import SinglePodcast from '../../components/SinglePodcast';
+import {useNavigation} from '@react-navigation/native';
+import commonStyles from '../../consts/styles';
 
 const Podcasts = () => {
   const [visiblePodcasts, setVisiblePodcasts] = useState(2);
   const podcasts = useStoreState((state) => state.podcasts);
+  const navigation = useNavigation();
 
   return (
     <View>
-      <View style={styles.headerContainer}>
-        <MyText style={styles.header}>Podcasts</MyText>
+      <TouchableOpacity
+        style={commonStyles.feedHeaderContainer}
+        onPress={() => navigation.navigate('PodcastsScreen')}>
+        <MyText style={commonStyles.feedHeader}>Podcasts</MyText>
         <AntDesign name={'arrowright'} size={30} color={'white'} />
-      </View>
+      </TouchableOpacity>
       <View>
         {podcasts.slice(0, visiblePodcasts).map((podcast, index) => (
-          <View key={`podcast_${index}`} style={styles.podcastContainer}>
-            <Image source={{uri: podcast.image}} style={styles.podcastImage} />
-            <View>
-              <MyText style={styles.podcastName}>{podcast.name}</MyText>
-              <MyText style={styles.podcastTitle} numberOfLines={2}>
-                {podcast.title}
-              </MyText>
-            </View>
-          </View>
+          <SinglePodcast index={index} podcast={podcast} />
         ))}
         <TouchableOpacity
           onPress={() => setVisiblePodcasts(visiblePodcasts + 2)}>
@@ -42,32 +34,6 @@ const Podcasts = () => {
 };
 
 const styles = StyleSheet.create({
-  podcastContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  podcastImage: {width: 50, height: 50, marginRight: 15, borderRadius: 25},
-  podcastTitle: {
-    flex: 1,
-    flexWrap: 'wrap',
-    width: Dimensions.get('screen').width - 100,
-    marginTop: 5,
-  },
-  podcastName: {
-    fontWeight: 'bold',
-    marginBottom: 5,
-  },
-  headerContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingRight: 10,
-    marginVertical: 20,
-  },
-  header: {
-    fontWeight: 'bold',
-    fontSize: 24,
-  },
   showOlder: {fontWeight: '500'},
 });
 
