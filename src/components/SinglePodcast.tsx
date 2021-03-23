@@ -3,10 +3,10 @@ import {Dimensions, Image, StyleSheet, View} from 'react-native';
 import MyText from './MyText';
 import Podcast from '../entities/Podcast';
 
-type Props = {podcast: Podcast; index: number};
-const SinglePodcast = ({podcast, index}: Props) => {
+type Props = {podcast: Podcast};
+const SinglePodcast = ({podcast}: Props) => {
   return (
-    <View key={`podcast_${index}`} style={styles.podcastContainer}>
+    <View style={styles.podcastContainer}>
       <Image source={{uri: podcast.image}} style={styles.podcastImage} />
       <View>
         <MyText style={styles.podcastName}>{podcast.name}</MyText>

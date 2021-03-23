@@ -29,7 +29,7 @@ const Tweets = () => {
       {tweets.length > 0 ? (
         <View>
           {tweets.splice(0, visibleTweets).map((tweet, index) => (
-            <SingleTweet tweet={tweet} index={index} />
+            <SingleTweet tweet={tweet} key={`tweet_${index}`} />
           ))}
           <TouchableOpacity onPress={() => setVisibleTweets(visibleTweets + 2)}>
             <MyText style={styles.showOlderText}>Show older</MyText>

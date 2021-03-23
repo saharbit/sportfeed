@@ -17,7 +17,7 @@ const PodcastsScreen = () => {
       <ScrollView>
         {podcasts.length > 0 ? (
           podcasts.map((podcast, index) => (
-            <SinglePodcast podcast={podcast} index={index} />
+            <SinglePodcast podcast={podcast} key={`pod_${index}`} />
           ))
         ) : (
           <ActivityIndicator />

@@ -1,5 +1,10 @@
 import React, {useState} from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {
+  ActivityIndicator,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import MyText from '../../components/MyText';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useStoreState} from '../../store';
@@ -20,15 +25,19 @@ const Podcasts = () => {
         <MyText style={commonStyles.feedHeader}>Podcasts</MyText>
         <AntDesign name={'arrowright'} size={30} color={'white'} />
       </TouchableOpacity>
-      <View>
-        {podcasts.slice(0, visiblePodcasts).map((podcast, index) => (
-          <SinglePodcast index={index} podcast={podcast} />
-        ))}
-        <TouchableOpacity
-          onPress={() => setVisiblePodcasts(visiblePodcasts + 2)}>
-          <MyText style={styles.showOlder}>Show older</MyText>
-        </TouchableOpacity>
-      </View>
+      {podcasts.length > 0 ? (
+        <View>
+          {podcasts.slice(0, visiblePodcasts).map((podcast, index) => (
+            <SinglePodcast key={`pod_${index}`} podcast={podcast} />
+          ))}
+          <TouchableOpacity
+            onPress={() => setVisiblePodcasts(visiblePodcasts + 2)}>
+            <MyText style={styles.showOlder}>Show older</MyText>
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <ActivityIndicator />
+      )}
     </View>
   );
 };

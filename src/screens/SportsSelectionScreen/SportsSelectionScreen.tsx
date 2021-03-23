@@ -6,6 +6,8 @@ import {ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../App';
 import {blue, darkBackground} from '../../consts/theme';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {SELECTED_SPORTS} from '../../consts/asyncStorage';
 
 type SportsSelectionScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -14,9 +16,10 @@ type SportsSelectionScreenNavigationProp = StackNavigationProp<
 
 type Props = {
   navigation: SportsSelectionScreenNavigationProp;
+  setUserSports: (sports: string[]) => void;
 };
 
-const SportsSelectionScreen = ({navigation}: Props) => {
+const SportsSelectionScreen = ({setUserSports}: Props) => {
   const [selectedSports, setSelectedSports] = useState<string[]>([]);
 
   function selectSport(sport: string) {
@@ -29,6 +32,11 @@ const SportsSelectionScreen = ({navigation}: Props) => {
     }
   }
 
+  function onSubmit() {
+    AsyncStorage.setItem(SELECTED_SPORTS, JSON.stringify(selectedSports));
+    setUserSports(selectedSports);
+  }
+
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.view}>
       <MyText style={styles.header}>Select your favourite sports</MyText>
@@ -36,9 +44,7 @@ const SportsSelectionScreen = ({navigation}: Props) => {
         selectedSports={selectedSports}
         selectSport={selectSport}
       />
-      <TouchableOpacity
-        style={styles.letsGoButton}
-        onPress={() => navigation.navigate('FeedScreen')}>
+      <TouchableOpacity style={styles.letsGoButton} onPress={onSubmit}>
         <MyText style={styles.letsGoButtonText}>Let's go</MyText>
       </TouchableOpacity>
     </ScrollView>

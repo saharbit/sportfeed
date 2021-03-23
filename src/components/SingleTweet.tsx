@@ -3,10 +3,10 @@ import {Dimensions, Image, StyleSheet, View} from 'react-native';
 import MyText from './MyText';
 import Tweet from '../entities/Tweet';
 
-type Props = {tweet: Tweet; index: number};
-const SingleTweet = ({tweet, index}: Props) => {
+type Props = {tweet: Tweet};
+const SingleTweet = ({tweet}: Props) => {
   return (
-    <View key={`tweet_${index}`} style={styles.tweetsContainer}>
+    <View style={styles.tweetsContainer}>
       <Image source={{uri: tweet.image}} style={styles.image} />
       <View>
         <View style={styles.tweetContainer}>

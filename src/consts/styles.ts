@@ -5,15 +5,17 @@ const commonStyles = StyleSheet.create({
   feedHeaderContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     paddingRight: 10,
     marginVertical: 20,
     backgroundColor: lessDarkBackground,
-    padding: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
     borderRadius: 25,
   },
   feedHeader: {
     fontWeight: 'bold',
-    fontSize: 24,
+    fontSize: 20,
   },
 });
 

@@ -12,12 +12,12 @@ const TweetsScreen = () => {
   return (
     <View style={styles.container}>
       <View style={commonStyles.feedHeaderContainer}>
-        <MyText style={styles.header}>Tweets</MyText>
+        <MyText style={commonStyles.feedHeader}>Tweets</MyText>
       </View>
       <ScrollView>
         {tweets.length > 0 ? (
           tweets.map((tweet, index) => (
-            <SingleTweet tweet={tweet} index={index} />
+            <SingleTweet tweet={tweet} key={`tweet_${index}`} />
           ))
         ) : (
           <ActivityIndicator />
@@ -28,13 +28,6 @@ const TweetsScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  headerContainer: {
-    marginBottom: 20,
-  },
-  header: {
-    fontWeight: 'bold',
-    fontSize: 24,
-  },
   container: {
     backgroundColor: darkBackground,
     flex: 1,
