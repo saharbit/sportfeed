@@ -24,7 +24,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
   },
-  podcastImage: {width: 50, height: 50, marginRight: 15, borderRadius: 25},
+  podcastImage: {
+    width: 50,
+    height: 50,
+    marginRight: 15,
+    // borderRadius: 25
+  },
   podcastTitle: {
     flex: 1,
     flexWrap: 'wrap',

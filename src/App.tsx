@@ -4,14 +4,20 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import SportsSelectionScreen from './screens/SportsSelectionScreen/SportsSelectionScreen';
 import FeedScreen from './screens/FeedScreen/FeedScreen';
-import {darkBackground} from './consts/theme';
+import {blue, darkBackground, lessDarkBackground} from './consts/theme';
 import {StoreProvider} from 'easy-peasy';
 import store from './store';
-import TweetsScreen from './screens/TweetsScreen/TweetsScreen';
 import PodcastsScreen from './screens/PodcastsScreen/PodcastsScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {SELECTED_SPORTS} from './consts/asyncStorage';
 import MyText from './components/MyText';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import ScoresScreen from './screens/ScoresScreen/ScoresScreen';
+import HighlightsScreen from './screens/HighlightsScreen/HighlightsScreen';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Fontisto from 'react-native-vector-icons/Fontisto';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import TweetsScreen from './screens/TweetsScreen/TweetsScreen';
 
 export type RootStackParamList = {
   SportsSelectionScreen: undefined;
@@ -21,6 +27,7 @@ export type RootStackParamList = {
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
+const Tab = createBottomTabNavigator();
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -51,8 +58,8 @@ const App = () => {
       <NavigationContainer>
         <StatusBar barStyle="light-content" />
         <SafeAreaView style={styles.view}>
-          <Stack.Navigator headerMode="none">
-            {userSports.length === 0 ? (
+          {userSports.length === 0 ? (
+            <Stack.Navigator headerMode="none">
               <Stack.Screen name="SportsSelectionScreen">
                 {(props) => (
                   <SportsSelectionScreen
@@ -61,17 +68,50 @@ const App = () => {
                   />
                 )}
               </Stack.Screen>
-            ) : (
-              <>
-                <Stack.Screen name="FeedScreen" component={FeedScreen} />
-                <Stack.Screen name="TweetsScreen" component={TweetsScreen} />
-                <Stack.Screen
-                  name="PodcastsScreen"
-                  component={PodcastsScreen}
-                />
-              </>
-            )}
-          </Stack.Navigator>
+            </Stack.Navigator>
+          ) : (
+            <Tab.Navigator
+              screenOptions={({route}) => ({
+                tabBarIcon: ({color, size}) => {
+                  if (route.name === 'Scores') {
+                    return (
+                      <MaterialCommunityIcons
+                        name={'scoreboard'}
+                        size={size}
+                        color={color}
+                      />
+                    );
+                  } else if (route.name === 'Podcasts') {
+                    return (
+                      <Fontisto name={'podcast'} size={size} color={color} />
+                    );
+                  } else if (route.name === 'Feed') {
+                    return (
+                      <FontAwesome name={'feed'} size={size} color={color} />
+                    );
+                  } else if (route.name === 'Highlights') {
+                    return (
+                      <FontAwesome
+                        name={'video-camera'}
+                        size={size}
+                        color={color}
+                      />
+                    );
+                  }
+                },
+              })}
+              tabBarOptions={{
+                activeTintColor: blue,
+                inactiveTintColor: 'gray',
+                inactiveBackgroundColor: darkBackground,
+                activeBackgroundColor: darkBackground,
+              }}>
+              <Tab.Screen name="Feed" component={TweetsScreen} />
+              <Tab.Screen name="Podcasts" component={PodcastsScreen} />
+              <Tab.Screen name="Scores" component={ScoresScreen} />
+              <Tab.Screen name="Highlights" component={HighlightsScreen} />
+            </Tab.Navigator>
+          )}
         </SafeAreaView>
       </NavigationContainer>
     </StoreProvider>

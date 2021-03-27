@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   view: {
     backgroundColor: darkBackground,
     flex: 1,
-    padding: 15,
+    paddingHorizontal: 15,
   },
 });
 

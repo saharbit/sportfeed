@@ -1,5 +1,5 @@
-import React from 'react';
-import {useStoreState} from '../../store';
+import React, {useEffect} from 'react';
+import {useStoreActions, useStoreState} from '../../store';
 import {ActivityIndicator, ScrollView, StyleSheet, View} from 'react-native';
 import MyText from '../../components/MyText';
 import {darkBackground} from '../../consts/theme';
@@ -8,6 +8,11 @@ import commonStyles from '../../consts/styles';
 
 const PodcastsScreen = () => {
   const podcasts = useStoreState((state) => state.podcasts);
+  const {fetchPodcasts} = useStoreActions((actions) => actions);
+
+  useEffect(() => {
+    fetchPodcasts();
+  }, [fetchPodcasts]);
 
   return (
     <View style={styles.container}>
@@ -38,7 +43,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: darkBackground,
     flex: 1,
-    padding: 15,
+    paddingHorizontal: 15,
   },
 });
 

@@ -31,7 +31,8 @@ export const fetchTweets = async () => {
         ),
       ];
     }
-    return _.sortBy(results, (tweet) => tweet.createddate).reverse();
+    // return _.sortBy(results, (tweet) => tweet.createddate).reverse();
+    return results;
   } catch (error) {
     console.error(error);
   }
