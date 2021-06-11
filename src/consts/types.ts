@@ -65,3 +65,4 @@ export type UserResult = {
   profile_image_url: string;
   username: string;
 };
+export type HighlightResult = {title: string; url: string};

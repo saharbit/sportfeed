@@ -11,6 +11,8 @@ import {
 } from 'easy-peasy';
 import {fetchPodcasts} from './services/PodcastsAPI';
 import {fetchTweets} from './services/TweetsAPI';
+import Highlight from './entities/Highlights';
+import {fetchNBAHighlights} from './services/HighlightsAPI';
 
 type StoreModel = {
   podcasts: Podcast[];
@@ -20,6 +22,9 @@ type StoreModel = {
   setTweets: Action<StoreModel, Tweet[]>;
   fetchTweets: Thunk<StoreModel>;
   upcomingEvents: UpcomingEvent[];
+  highlights: Highlight[];
+  setHighlights: Action<StoreModel, Highlight[]>;
+  fetchHighlights: Thunk<StoreModel>;
 };
 
 const typedHooks = createTypedHooks<StoreModel>();
@@ -46,6 +51,14 @@ const storeModel: StoreModel = {
     actions.setTweets(tweets || []);
   }),
   upcomingEvents: [],
+  highlights: [],
+  setHighlights: action((state, payload) => {
+    state.highlights = payload;
+  }),
+  fetchHighlights: thunk(async (actions) => {
+    const highlights = await fetchNBAHighlights();
+    actions.setHighlights(highlights || []);
+  }),
 };
 
 const store = createStore(storeModel);
